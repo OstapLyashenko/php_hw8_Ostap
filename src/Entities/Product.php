@@ -5,6 +5,7 @@ namespace Hillel\Entities;
 use Hillel\Casts\ArrayCast;
 use Hillel\Casts\MoneyCast;
 use Hillel\Casts\DateTimeCast;
+use phpDocumentor\Reflection\Types\Float_;
 
 class Product
 {
@@ -29,19 +30,26 @@ class Product
 
     public function __set(string $variable, mixed $value)
     {
-        $this->$variable;
+        if (isset($this->casts[$variable])) {
+            $class = $this->casts[$variable];
+            $method = 'set';
+            return $class::$method($this->$variable);
+        }
     }
 
     public function __get($variable)
     {
-        if (isset($this->$variable)) {
-            return null;
+        if (isset($this->casts[$variable])) {
+            $class = $this->casts[$variable];
+            $method = 'get';
+            return $class::$method($this->$variable);
         }
     }
 
     public function __toString(): string
-    {   return  print_r($this->price, true);
-        return print_r($this->attributes, true);
-        return print_r($this->updatedAt, true);
+    {
+        return 'Price: ' . $this->price . "<br>"
+            . 'Attributes: ' . print_r($this->attributes) . "<br>"
+            . 'Time: ' . $this->updatedAt;
     }
 }

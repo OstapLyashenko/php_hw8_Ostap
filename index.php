@@ -27,3 +27,4 @@ echo $product;
 echo $product->price;
 print_r($product->attributes);
 echo $product->updatedAt;
+

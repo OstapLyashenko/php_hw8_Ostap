@@ -30,12 +30,12 @@ class StrTest extends TestCase
                 ->getValue($this->product)
         );
 
-        $this->product->price = 18500;
+        $this->product->price = 17500;
 
-        $this->assertEqualsCanonicalizing(18500, $this->product->price);
+        $this->assertEqualsCanonicalizing(17500, $this->product->price);
 
         $this->assertEquals(
-            1850000,
+            1750000,
             (new ReflectionClass(Product::class))
                 ->getProperty('price')
                 ->getValue($this->product)
@@ -76,7 +76,7 @@ class StrTest extends TestCase
     public function testUpdatedAt()
     {
         $this->assertEqualsCanonicalizing(
-            '2022-04-08 17:31:09',
+            '2022-04-08 18:51:38',
             $this->product->updatedAt
         );
 
@@ -90,7 +90,7 @@ class StrTest extends TestCase
         $this->product->updatedAt = 1649433098;
 
         $this->assertEqualsCanonicalizing(
-            '2022-04-08 18:51:38',
+            '2022-04-08 17:31:09',
             $this->product->updatedAt
         );
 
